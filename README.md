@@ -2,6 +2,6 @@
 
 Visit at this [link](https://h-tu.github.io/cs320final/)
 
-https://stats.nba.com/teams/traditional/?sort=W_PCT&dir=-1
+nba data
 
-https://stats.nba.com/teams/traditional/?sort=W_PCT&dir=-1&Season=2018-19&SeasonType=Regular%20Season
+https://stats.nba.com/teams/traditional/?sort=TEAM_NAME&dir=1&Season=2018-19&SeasonType=Regular%20Season
