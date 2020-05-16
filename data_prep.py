@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 import math
 import requests
 import numpy as np
@@ -13,14 +7,10 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 import matplotlib.pyplot as plt
 
-
-# In[39]:
-
-
 df = pd.DataFrame()
+address = 'r'C:\\Users\\TomTu\\OneDrive - University of Maryland\\2020 Spring\\CMSC 320\\\nba_data.csv'
 
 for year in range(2000,2020):
-    #NBA season
     url = 'https://www.basketball-reference.com/leagues/NBA_{}.html#all_team-stats-base'.format(str(year))
     page = requests.get(url)
 
@@ -54,23 +44,10 @@ for year in range(2000,2020):
     
     df = df.append(tmp)
 
-
-# In[40]:
-
-
 name = [i.replace('*','') if '*' in i else i for i in df.Team.tolist()]
 new_df = pd.DataFrame({'Team': name})
-
-
-# In[41]:
-
 
 df.update(new_df)
 df.head(10)
 
-
-# In[42]:
-
-
-df.to_csv(r'C:\\Users\\TomTu\\OneDrive - University of Maryland\\2020 Spring\\CMSC 320\\\nba_data.csv', index = False)
-
+df.to_csv(address, index = False)
