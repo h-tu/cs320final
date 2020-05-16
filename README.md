@@ -1,11 +1,11 @@
-## Spring 2020  CMSC 320 Final Project
+## Spring 2020 CMSC 320 Final Project
 
 Contributors
 - Hongyu Tu
 - Yujian Zhao
 - Zhaoyi Zhuang
 
-Visit our final project at this [link](https://h-tu.github.io/cs320final/)
+Visit our final project at this <a href="https://h-tu.github.io/cs320final/" target="_blank">Link</a>
 
 Motivation. Does the tutorial make the reader believe the topic is relevant or important (i) in general and (ii) with respect to data science?
 
