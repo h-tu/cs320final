@@ -22,7 +22,11 @@ output: html_document
 ### 3. Data Analysis
 * Attribute vs. Wininning percentage over year
 
-### 4. Conclusion
+### 4. Python Part
+* Scraping and cleanning
+* Modeling
+
+### 5. Conclusion
 
 --------------------------------------------------------------------------------------------------------
 
@@ -87,6 +91,7 @@ library(ggplot2)
 ```
 
 ### 2.2 Original Data
+Since we used Python to scrape data from the website. So, to see how we scrape data and clean it, please go the part 4 - Python Part.
 ```{r}
 path = "/Users/zhaoyizhuang/Downloads/cs320final-master/nba_data.csv"
 data  <- read.csv(path)
@@ -301,4 +306,6 @@ model
 <br>
 As the above graphs shown, the cluster of points and the regression line are moving to the right, which means the 3-point field goal percentage is improving and the number of 3-point field goal is increasing. Also, 3-point field goal percentage has positive relationship with the winning percentage, which means higher 3-point field goal percentage leads to win. <br>
 
+
+## Python Part
 
