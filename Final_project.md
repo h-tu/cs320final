@@ -1020,11 +1020,11 @@ plt.show()
 ```
 
 
-![png](output_18_0.png)
+![png](pictures/output_18_0.png)
 
 
 
-![png](output_18_1.png)
+![png](pictures/output_18_1.png)
 
 
 From graph, we can see that for the past 20 years as a whole, the most import factors that contribute to winning a game are field goals made, total rebounds, blocks, two-point field goals made, steal, three-point field goals made, and turnover will hurt a team the most. 
@@ -1091,11 +1091,11 @@ plt.show()
 ```
 
 
-![png](output_23_0.png)
+![png](pictures/output_23_0.png)
 
 
 
-![png](output_23_1.png)
+![png](pictures/output_23_1.png)
 
 
 From the graph above, I got the same result as I predicted: three pointers are the most important contributor as a home team gets a win. For the previus model, where we are using the past 20 years to do the prediction, 3P were both ranked 7th as for the contributor. Besides home team, we can also see that the 3P's importance was raised and now is ranked 4th as it comes to predicting the win. 
