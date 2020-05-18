@@ -36,7 +36,7 @@ One of the greatest coaches of all time Gregg Popovich said “Everything is abo
 ### 1.2 Project Motivation
 As said in the introduction, NBA has changed a lot of its offense and defense, every team played faster and shoot more threes. It can be said that NBA entered the era of “three points shooting”. Our team is interested in how NBA is changed according to data.<br>
 
-In order to do the investigation, we tried to scrape the data from the official website of NBA, but there seems to be a protection of the web producer that forbidden unauthorized users to use the data from their website. Then we searched on the internet and tend to find the best data website of NBA. After some comparison, we decide to scrape the data from the website https://www.basketball-reference.com/leagues/NBA_2020.html#all_team-stats-base. We used the table of Miscellaneous Stats. We will analyze the relationship between winning percentage with different attributes like three points attempt rate. We also wants to find the difference in different categories, like pace, through 2000-2019
+In order to do the investigation, we tried to scrape the data from the official website of NBA, but there seems to be a protection of the web producer that forbidden unauthorized users to use the data from their website. Then we searched on the internet and tend to find the best data website of NBA. After some comparison, we decide to scrape the data from the website https://www.basketball-reference.com/leagues/NBA_2020.html#all_team-stats-base. We used the table of Miscellaneous Stats. We will analyze the relationship between winning percentage with different attributes like three points attempt rate. We also wants to find the difference in different categories, like pace, through 2000-2019.
 
 ### 1.3 Glossary
 Since every column has its abbreviate name. So we provide you the glossary.<br>
@@ -60,7 +60,11 @@ eFG -- Effective Field Goal Percentage. This statistic adjusts for the fact that
 TOV -- Turnover Percentage. An estimate of turnovers committed per 100 plays.<br>
 ORBOffensive Rebound Percentage. An estimate of the percentage of available offensive rebounds a player grabbed while he was on the floor.<br>
 FT/FGA -- Free Throws Per Field Goal Attempt. Defense Four Factors<br>
-DRB -- Defensive Rebound Percentage. An estimate of the percentage of available defensive rebounds a player grabbed while he was on the floor.<br>
+DRB. -- Defensive Rebound Percentage. An estimate of the percentage of available defensive rebounds a player grabbed while he was on the floor.<br>
+DRB -- Defensive Rebound Ball<br>
+ORB -- Offensive Rebound Ball<br>
+TRB -- Total Rebound Ball<br>
+AST -- Assistant<br>
 G -- Games<br>
 MP -- Minutes Played<br>
 FG -- Field Goals<br>
@@ -90,9 +94,12 @@ data %>% head()
 ```
 
 ### 2.3 Organize Dataset
-To find the relationship between those stats and the winning percentage. We have to first add a column contains the winning percentage. We use the formula Win/(Win+Lose) to find the winning percentage.
+To find the relationship between those stats and the winning percentage. We have to first add a column contains the winning percentage. We use the formula Win/(Win+Lose) to find the winning percentage. Also, we add a new column called year to represent 5 year intervals.
 ```{r}
 data <- data %>% mutate(WP = W/(W+L))
+#cut year into 5 intervals
+data <- data %>%
+  mutate(year = cut(yearID, breaks = 5))
 data %>% head()
 ```
 
@@ -129,6 +136,14 @@ data %>% ggplot(aes(x = yearID, y = ORtg, color = yearID)) +
 Offensive Rating is An estimate of points produced (players) or scored (teams) per 100 possessions. In the first graph, we can see a strong positive relationship between offensive rating and winning percentage. Whenever through 2000 to 2019, higher offensive rating will lead to higher winning percentage. If you want to win, you must be able to score points. It is the common rule in any sports. In the second graoh, we can find out that in general, offensive rating becomes higher and higher through 2000 to 2019. We believe it is because higher pace and more three points attempt.
 
 ### 3.3 How does Three-points ball affect the game over time
+### 3.3.0
+```{r}
+p1 = ggplot(data = data, aes(x = as.character(yearID), y = X3PA)) + geom_boxplot()
+p1 + ggtitle("3-Point Field Goal Attempt Over Time") + xlab("Year") + ylab("3-Point Field Goal  Attempt")
+```
+<br>
+Frorom the above graph, we can see that in recent year, the 3-point field goal(3PFG) attempt is increasing which shows that nowadyas NBA are more incling to shoot 3PFG. So, in this section, we are going to discuss why does this trend happen. <br>
+
 ### 3.3.1
 ```{r}
 data %>% ggplot(aes(x = X3PAr, y = WP, color = yearID)) + 
@@ -215,7 +230,75 @@ data %>% ggplot(aes(x = X3PA , y = Pace, color = yearID)) +
   geom_smooth(method=lm)
 
 ```
+
 <br>
 
 ### 3.3.7
-So, based on what we did so far, we can see that in recent few years, the three points field goal attempt rate is much higher than it in before. We try to find the reason behind it. Based on what we got from the dataset, we state that it may be caused by the changing of the game style, the changing of audience's Aesthetic and the goal to win.
+So, based on what we did so far, we can see that in recent few years, the three points field goal attempt rate is much higher than it in before. We try to find the reason behind it. Based on what we got from the dataset, we state that it may be caused by the changing of the game style, the changing of audience's Aesthetic and the goal to win.<br>
+
+### 3.4
+In this section we want to discuss more about the change of the trend of how teams play in NBA. So, we draw several graphs for attribute vs. winning percentage based on 5 year intervals. By this way, we can see more clearly that how does an attribute contributes to the game during a specific time period.<br>
+
+### 3.4.1
+Below graph shows Winning Percentage vs. Total Rebound Ball over year.<br>
+```{r}
+data %>%
+  ggplot(aes(x=TRB, y=WP)) +
+    geom_point(aes(color = year)) + 
+    facet_wrap(~year) +
+    xlab("Total Reebound Ball") + ylab("Winning Perercentage") + 
+    ggtitle("Winning Percentage vs Total Reebound Ball") + 
+    geom_smooth(method = 'lm') + labs(color = "Time period")
+```
+
+```{r}
+regression <- lm(WP~TRB*year, data = data)
+model <- regression  %>% broom::tidy()
+model
+```
+
+<br>
+So, based on the above graph and statistics, we can see that in 2015-2019, teams grabbed more than other four time periods. It is may caused by the reason that pace is faster. The line is flatter in 2011-2015 than other four graphs. This is because the points are distributed more seperately in horizon. In general, more rebound balls bring higher winning percentage. <br>
+
+### 3.4.2
+```{r}
+data %>%
+  ggplot(aes(x=AST, y=WP, color = year)) +
+    geom_point() +
+    xlab("Assistant") + ylab("Winning Perercentage") + 
+    ggtitle("Winning Percentage vs Assistant") + 
+    geom_smooth(method = 'lm') + labs(color = "Time period")
+```
+
+```{r}
+regression <- lm(WP~AST*year, data = data)
+model <- regression  %>% broom::tidy()
+model
+```
+
+<br>
+From above graphs and statistics, we can draw a conclusion that More assistants lead to a higher winning percentage. Namely, whether a team win or not depends on the number of the Assistants in some degree. In 2015 - 2019, the the number of Assistants is more than other four time periods. It may caused by the fact that there are more offensive positions which causes more opportunities to gain assistants.<br>
+
+### 3.4.3
+
+```{r}
+data %>%
+  ggplot(aes(x=X3P., y=WP)) +
+    geom_point(aes(color = year)) + 
+    facet_wrap(~year) +
+    xlab("3PFG Percentage") + ylab("Winning Perercentage") + 
+    ggtitle("Winning Percentage vs 3PFG Percentage") + 
+    geom_smooth(method = 'lm') + labs(color = "Time period")
+```
+
+
+```{r}
+regression <- lm(WP~X3P.*year, data = data)
+model <- regression  %>% broom::tidy()
+model
+```
+
+<br>
+As the above graphs shown, the cluster of points and the regression line are moving to the right, which means the 3-point field goal percentage is improving and the number of 3-point field goal is increasing. Also, 3-point field goal percentage has positive relationship with the winning percentage, which means higher 3-point field goal percentage leads to win. <br>
+
+
