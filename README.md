@@ -1,5 +1,7 @@
 ## Spring 2020 CMSC 320 Final Project
 
+![](small_logo.jpg)
+
 Contributors
 - Hongyu Tu
 - Yujian Zhao
