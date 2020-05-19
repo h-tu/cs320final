@@ -7,7 +7,7 @@ output: html_document
 
 ![](small_logo.jpg)
 
-## Github Repository
+### Github Repository
 
 To see the original Github Repository, click https://github.com/h-tu/cs320final
 You can find all the data, rmd file and this html in this repository.
