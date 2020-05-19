@@ -28,6 +28,8 @@ output: html_document
 
 ### 5. Conclusion
 
+### 6. Additional Information
+
 --------------------------------------------------------------------------------------------------------
 
 ## 1.Introduction
@@ -608,3 +610,17 @@ The most obvious change is that teams start to shoot more threes. The three-poin
 After doing the modeling, we proved again that for both home team and away team three-point becomes more and more important for them to win a game. Not surprisingly, field-goal, rebounds, assists, steals, blocks will always has positive relationship with wins, while turnover will have negative one.
 
 In conclusion, the offensive style has changed in the league, every team tends to play faster and shoot more threes, which we proved that higher efficiency in three-points shooting can bring team wins. We believe three-points field goal will keep playing a important role in NBA at least five more years.
+
+## 6 Additional Information
+
+In this study, since our output data is categorical, we decided to used logisic regression classifier as it does well when we are trying to seperate two items. For more information on logistic classifier, here are some helpful links:
+
+[Wiki - logistic regression](https://en.wikipedia.org/wiki/Logistic_regression)
+
+[Scikit-Learn API](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html)
+
+In the process of this study, we also had some inspiration from serval youtube videos that shows how to do data analysis with python and game data, here are the links for anyone that wants to explore this topic further.
+
+[Predicting NFL games](https://www.youtube.com/watch?v=8emUyzczThY&t=1624s)
+
+[model details](https://www.youtube.com/watch?v=6tQhoUuQrOw&t=1148s)
