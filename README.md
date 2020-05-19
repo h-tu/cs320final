@@ -9,3 +9,4 @@ Contributors
 
 Visit our final project R Markdown at this <a href="https://h-tu.github.io/cs320final/" target="_blank">Link</a>
 
+The two csv dataset can be found in /data directory.
