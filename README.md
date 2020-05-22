@@ -1,4 +1,6 @@
-## Spring 2020 CMSC 320 Final Project
+## Using Data Science and Machine Learning for Predicting NBA Games
+
+Spring 2020 CMSC 320 Final Project
 
 ![](small_logo.jpg)
 
